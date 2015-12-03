@@ -1,0 +1,60 @@
+﻿@model IEnumerable<DkEventos.Evento>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<aside class="right-side">
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.titulo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.descricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.local)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.programa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoEvento.nome)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.titulo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.descricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.local)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.programa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipoEvento.nome)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.idEvento }) |
+                    @Html.ActionLink("Detalhes", "Details", new { id = item.idEvento }) |
+                    @Html.ActionLink("Apagar", "Delete", new { id = item.idEvento })
+                </td>
+            </tr>
+        }
+
+    </table>
+    </aside>

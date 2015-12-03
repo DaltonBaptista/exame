@@ -1,0 +1,51 @@
+﻿@model DkEventos.ParticipantesPrincipai
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<aside class="right-side">
+    <div>
+        <h4>ParticipantesPrincipai</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.orador)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.orador)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.palestrante)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.palestrante)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Evento.titulo)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Evento.titulo)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Participante.nome)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Participante.nome)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.idParticipantePrincipal }) |
+        @Html.ActionLink("Voltar a lista", "Index")
+    </p>
+    </aside>

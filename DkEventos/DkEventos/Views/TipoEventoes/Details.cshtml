@@ -1,0 +1,28 @@
+﻿@model DkEventos.TipoEvento
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<aside class="right-side">
+
+    <div>
+        <h4>TipoEvento</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.nome)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.nome)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.idTipoEvento }) |
+        @Html.ActionLink("Voltar a lista", "Index")
+    </p>
+    </aside>

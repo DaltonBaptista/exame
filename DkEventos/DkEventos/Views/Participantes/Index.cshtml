@@ -1,0 +1,84 @@
+﻿@model IEnumerable<DkEventos.Participante>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<aside class="right-side">
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.apelido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.grau_academico)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.empresa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.trabalho)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.data_nascimento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.sexo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.telefone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.email)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.apelido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.grau_academico)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.empresa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.trabalho)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.data_nascimento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sexo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.telefone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.email)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.idParticipante }) |
+                    @Html.ActionLink("Detalhes", "Details", new { id = item.idParticipante }) |
+                    @Html.ActionLink("Apagar", "Delete", new { id = item.idParticipante })
+                </td>
+            </tr>
+        }
+
+    </table>
+    </aside>

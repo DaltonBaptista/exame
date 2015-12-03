@@ -1,0 +1,54 @@
+﻿@model IEnumerable<DkEventos.ParticipantesPrincipai>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<aside class="right-side">
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.orador)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.palestrante)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Evento.titulo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Participante.nome)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.orador)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.palestrante)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Evento.titulo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Participante.nome)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.idParticipantePrincipal }) |
+                    @Html.ActionLink("Detalhes", "Details", new { id = item.idParticipantePrincipal }) |
+                    @Html.ActionLink("Apagar", "Delete", new { id = item.idParticipantePrincipal })
+                </td>
+            </tr>
+        }
+
+    </table>
+    </aside>

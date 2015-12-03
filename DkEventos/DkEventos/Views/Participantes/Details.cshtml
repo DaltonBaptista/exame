@@ -1,0 +1,92 @@
+﻿@model DkEventos.Participante
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<aside class="right-side">
+
+    <div>
+        <h4>Participante</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.nome)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.nome)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.apelido)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.apelido)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.grau_academico)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.grau_academico)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.empresa)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.empresa)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.trabalho)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.trabalho)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.data_nascimento)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.data_nascimento)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.sexo)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.sexo)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.telefone)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.telefone)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.email)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.idParticipante }) |
+        @Html.ActionLink("Voltar a lista", "Index")
+    </p>
+    </aside>

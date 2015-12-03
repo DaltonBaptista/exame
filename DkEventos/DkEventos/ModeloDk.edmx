@@ -1,0 +1,386 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="dkeventosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Estado">
+          <Key>
+            <PropertyRef Name="idEstado" />
+          </Key>
+          <Property Name="idEstado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="activo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="cancelado" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="idEvento" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Evento">
+          <Key>
+            <PropertyRef Name="idEvento" />
+          </Key>
+          <Property Name="idEvento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="titulo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="descricao" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="local" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="programa" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="idTipoEvento" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Participante">
+          <Key>
+            <PropertyRef Name="idParticipante" />
+          </Key>
+          <Property Name="idParticipante" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="apelido" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="grau academico" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="empresa" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="trabalho" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="data nascimento" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="sexo" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="telefone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ParticipantesPrincipais">
+          <Key>
+            <PropertyRef Name="idParticipantePrincipal" />
+          </Key>
+          <Property Name="idParticipantePrincipal" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="orador" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="palestrante" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="idEvento" Type="int" Nullable="false" />
+          <Property Name="idParticipante" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TipoEvento">
+          <Key>
+            <PropertyRef Name="idTipoEvento" />
+          </Key>
+          <Property Name="idTipoEvento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Estado_Evento">
+          <End Role="Evento" Type="Self.Evento" Multiplicity="1" />
+          <End Role="Estado" Type="Self.Estado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Evento">
+              <PropertyRef Name="idEvento" />
+            </Principal>
+            <Dependent Role="Estado">
+              <PropertyRef Name="idEvento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Evento_TipoEvento">
+          <End Role="TipoEvento" Type="Self.TipoEvento" Multiplicity="1" />
+          <End Role="Evento" Type="Self.Evento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoEvento">
+              <PropertyRef Name="idTipoEvento" />
+            </Principal>
+            <Dependent Role="Evento">
+              <PropertyRef Name="idTipoEvento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ParticipantesPrincipais_Evento">
+          <End Role="Evento" Type="Self.Evento" Multiplicity="1" />
+          <End Role="ParticipantesPrincipais" Type="Self.ParticipantesPrincipais" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Evento">
+              <PropertyRef Name="idEvento" />
+            </Principal>
+            <Dependent Role="ParticipantesPrincipais">
+              <PropertyRef Name="idEvento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ParticipantesPrincipais_Participante">
+          <End Role="Participante" Type="Self.Participante" Multiplicity="1" />
+          <End Role="ParticipantesPrincipais" Type="Self.ParticipantesPrincipais" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Participante">
+              <PropertyRef Name="idParticipante" />
+            </Principal>
+            <Dependent Role="ParticipantesPrincipais">
+              <PropertyRef Name="idParticipante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dkeventosModelStoreContainer">
+          <EntitySet Name="Estado" EntityType="Self.Estado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Evento" EntityType="Self.Evento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Participante" EntityType="Self.Participante" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ParticipantesPrincipais" EntityType="Self.ParticipantesPrincipais" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoEvento" EntityType="Self.TipoEvento" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Estado_Evento" Association="Self.FK_Estado_Evento">
+            <End Role="Evento" EntitySet="Evento" />
+            <End Role="Estado" EntitySet="Estado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evento_TipoEvento" Association="Self.FK_Evento_TipoEvento">
+            <End Role="TipoEvento" EntitySet="TipoEvento" />
+            <End Role="Evento" EntitySet="Evento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ParticipantesPrincipais_Evento" Association="Self.FK_ParticipantesPrincipais_Evento">
+            <End Role="Evento" EntitySet="Evento" />
+            <End Role="ParticipantesPrincipais" EntitySet="ParticipantesPrincipais" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ParticipantesPrincipais_Participante" Association="Self.FK_ParticipantesPrincipais_Participante">
+            <End Role="Participante" EntitySet="Participante" />
+            <End Role="ParticipantesPrincipais" EntitySet="ParticipantesPrincipais" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dkeventosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Estado">
+          <Key>
+            <PropertyRef Name="idEstado" />
+          </Key>
+          <Property Name="idEstado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="activo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cancelado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idEvento" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Evento" Relationship="Self.FK_Estado_Evento" FromRole="Estado" ToRole="Evento" />
+        </EntityType>
+        <EntityType Name="Evento">
+          <Key>
+            <PropertyRef Name="idEvento" />
+          </Key>
+          <Property Name="idEvento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="titulo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descricao" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="local" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="programa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idTipoEvento" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Estadoes" Relationship="Self.FK_Estado_Evento" FromRole="Evento" ToRole="Estado" />
+          <NavigationProperty Name="TipoEvento" Relationship="Self.FK_Evento_TipoEvento" FromRole="Evento" ToRole="TipoEvento" />
+          <NavigationProperty Name="ParticipantesPrincipais" Relationship="Self.FK_ParticipantesPrincipais_Evento" FromRole="Evento" ToRole="ParticipantesPrincipais" />
+        </EntityType>
+        <EntityType Name="Participante">
+          <Key>
+            <PropertyRef Name="idParticipante" />
+          </Key>
+          <Property Name="idParticipante" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apelido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="grau_academico" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="empresa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="trabalho" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="data_nascimento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sexo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="telefone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ParticipantesPrincipais" Relationship="Self.FK_ParticipantesPrincipais_Participante" FromRole="Participante" ToRole="ParticipantesPrincipais" />
+        </EntityType>
+        <EntityType Name="ParticipantesPrincipai">
+          <Key>
+            <PropertyRef Name="idParticipantePrincipal" />
+          </Key>
+          <Property Name="idParticipantePrincipal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="orador" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="palestrante" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idEvento" Type="Int32" Nullable="false" />
+          <Property Name="idParticipante" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Evento" Relationship="Self.FK_ParticipantesPrincipais_Evento" FromRole="ParticipantesPrincipais" ToRole="Evento" />
+          <NavigationProperty Name="Participante" Relationship="Self.FK_ParticipantesPrincipais_Participante" FromRole="ParticipantesPrincipais" ToRole="Participante" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TipoEvento">
+          <Key>
+            <PropertyRef Name="idTipoEvento" />
+          </Key>
+          <Property Name="idTipoEvento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Eventoes" Relationship="Self.FK_Evento_TipoEvento" FromRole="TipoEvento" ToRole="Evento" />
+        </EntityType>
+        <Association Name="FK_Estado_Evento">
+          <End Role="Evento" Type="Self.Evento" Multiplicity="1" />
+          <End Role="Estado" Type="Self.Estado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Evento">
+              <PropertyRef Name="idEvento" />
+            </Principal>
+            <Dependent Role="Estado">
+              <PropertyRef Name="idEvento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Evento_TipoEvento">
+          <End Role="TipoEvento" Type="Self.TipoEvento" Multiplicity="1" />
+          <End Role="Evento" Type="Self.Evento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoEvento">
+              <PropertyRef Name="idTipoEvento" />
+            </Principal>
+            <Dependent Role="Evento">
+              <PropertyRef Name="idTipoEvento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ParticipantesPrincipais_Evento">
+          <End Role="Evento" Type="Self.Evento" Multiplicity="1" />
+          <End Role="ParticipantesPrincipais" Type="Self.ParticipantesPrincipai" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Evento">
+              <PropertyRef Name="idEvento" />
+            </Principal>
+            <Dependent Role="ParticipantesPrincipais">
+              <PropertyRef Name="idEvento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ParticipantesPrincipais_Participante">
+          <End Role="Participante" Type="Self.Participante" Multiplicity="1" />
+          <End Role="ParticipantesPrincipais" Type="Self.ParticipantesPrincipai" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Participante">
+              <PropertyRef Name="idParticipante" />
+            </Principal>
+            <Dependent Role="ParticipantesPrincipais">
+              <PropertyRef Name="idParticipante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dkeventosEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Estadoes" EntityType="Self.Estado" />
+          <EntitySet Name="Eventoes" EntityType="Self.Evento" />
+          <EntitySet Name="Participantes" EntityType="Self.Participante" />
+          <EntitySet Name="ParticipantesPrincipais" EntityType="Self.ParticipantesPrincipai" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="TipoEventoes" EntityType="Self.TipoEvento" />
+          <AssociationSet Name="FK_Estado_Evento" Association="Self.FK_Estado_Evento">
+            <End Role="Evento" EntitySet="Eventoes" />
+            <End Role="Estado" EntitySet="Estadoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evento_TipoEvento" Association="Self.FK_Evento_TipoEvento">
+            <End Role="TipoEvento" EntitySet="TipoEventoes" />
+            <End Role="Evento" EntitySet="Eventoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ParticipantesPrincipais_Evento" Association="Self.FK_ParticipantesPrincipais_Evento">
+            <End Role="Evento" EntitySet="Eventoes" />
+            <End Role="ParticipantesPrincipais" EntitySet="ParticipantesPrincipais" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ParticipantesPrincipais_Participante" Association="Self.FK_ParticipantesPrincipais_Participante">
+            <End Role="Participante" EntitySet="Participantes" />
+            <End Role="ParticipantesPrincipais" EntitySet="ParticipantesPrincipais" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dkeventosModelStoreContainer" CdmEntityContainer="dkeventosEntities">
+          <EntitySetMapping Name="Estadoes">
+            <EntityTypeMapping TypeName="dkeventosModel.Estado">
+              <MappingFragment StoreEntitySet="Estado">
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="cancelado" ColumnName="cancelado" />
+                <ScalarProperty Name="idEvento" ColumnName="idEvento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Eventoes">
+            <EntityTypeMapping TypeName="dkeventosModel.Evento">
+              <MappingFragment StoreEntitySet="Evento">
+                <ScalarProperty Name="idEvento" ColumnName="idEvento" />
+                <ScalarProperty Name="titulo" ColumnName="titulo" />
+                <ScalarProperty Name="descricao" ColumnName="descricao" />
+                <ScalarProperty Name="local" ColumnName="local" />
+                <ScalarProperty Name="programa" ColumnName="programa" />
+                <ScalarProperty Name="idTipoEvento" ColumnName="idTipoEvento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Participantes">
+            <EntityTypeMapping TypeName="dkeventosModel.Participante">
+              <MappingFragment StoreEntitySet="Participante">
+                <ScalarProperty Name="idParticipante" ColumnName="idParticipante" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="apelido" ColumnName="apelido" />
+                <ScalarProperty Name="grau_academico" ColumnName="grau academico" />
+                <ScalarProperty Name="empresa" ColumnName="empresa" />
+                <ScalarProperty Name="trabalho" ColumnName="trabalho" />
+                <ScalarProperty Name="data_nascimento" ColumnName="data nascimento" />
+                <ScalarProperty Name="sexo" ColumnName="sexo" />
+                <ScalarProperty Name="telefone" ColumnName="telefone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ParticipantesPrincipais">
+            <EntityTypeMapping TypeName="dkeventosModel.ParticipantesPrincipai">
+              <MappingFragment StoreEntitySet="ParticipantesPrincipais">
+                <ScalarProperty Name="idParticipantePrincipal" ColumnName="idParticipantePrincipal" />
+                <ScalarProperty Name="orador" ColumnName="orador" />
+                <ScalarProperty Name="palestrante" ColumnName="palestrante" />
+                <ScalarProperty Name="idEvento" ColumnName="idEvento" />
+                <ScalarProperty Name="idParticipante" ColumnName="idParticipante" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="dkeventosModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoEventoes">
+            <EntityTypeMapping TypeName="dkeventosModel.TipoEvento">
+              <MappingFragment StoreEntitySet="TipoEvento">
+                <ScalarProperty Name="idTipoEvento" ColumnName="idTipoEvento" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

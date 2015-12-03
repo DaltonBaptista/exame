@@ -1,0 +1,42 @@
+﻿@model DkEventos.Estado
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<aside class="right-side">
+    <h4>Estado</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.activo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.activo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cancelado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cancelado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Evento.titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Evento.titulo)
+        </dd>
+
+    </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.idEstado }) |
+        @Html.ActionLink("Voltar a lista", "Index")
+    </p>
+    </aside>
